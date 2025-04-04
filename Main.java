@@ -6,7 +6,6 @@ public class Main{
         Scanner scanner = new Scanner(System.in);
         int N = 0;
 
-
         while (true) {
             System.out.print("Enter number of students: ");
             if (scanner.hasNextInt()) {
@@ -22,15 +21,15 @@ public class Main{
             }
         }
         
-        int[] grades = new int[N];
-        System.out.println("Enter the grades (0-100):");
+        int[] scores = new int[N];
+        System.out.println("Enter all the grades with a space in between, ensure it is between (0-100):");
         for (int i = 0; i < N; i++) {
             while (true) {
-                System.out.print("Grade " + (i + 1) + ": ");
+                System.out.print("Grades: ");
                 if (scanner.hasNextInt()) {
                     int grade = scanner.nextInt();
                     if (grade >= 0 && grade <= 100) {
-                        grades[i] = grade;
+                        scores[i] = grade;
                         break;
                     } else {
                         System.out.println("Invalid input! Please enter a grade between 0 and 100.");
@@ -43,9 +42,9 @@ public class Main{
         }
 
 
-        int maxGrade = Arrays.stream(grades).max().orElse(0);
-        int minGrade = Arrays.stream(grades).min().orElse(0);
-        double avgGrade = Arrays.stream(grades).average().orElse(0.0);
+        int maxGrade = Arrays.stream(scores).max().orElse(0);
+        int minGrade = Arrays.stream(scores).min().orElse(0);
+        double avgGrade = Arrays.stream(scores).average().orElse(0.0);
 
         System.out.println("\nValues:");
         System.out.println("The maximum grade is " + maxGrade);
@@ -53,7 +52,7 @@ public class Main{
         System.out.printf("The average grade is %.2f\n", avgGrade);
 
         int[] stats = new int[5];
-        for (int grade : grades) {
+        for (int grade : scores) {
             if (grade <= 20) stats[0]++;
             else if (grade <= 40) stats[1]++;
             else if (grade <= 60) stats[2]++;
@@ -65,19 +64,19 @@ public class Main{
 
         System.out.println("\nGraph:\n");
         for (int row = maxHeight; row > 0; row--) {
-            System.out.printf("%2d  > ", row);
+            System.out.print("   " + row + " > ");
             for (int count : stats) {
                 if (count >= row) {
-                    System.out.print(" ####### ");
+                    System.out.print(" #######   ");
                 } else {
-                    System.out.print("         ");
+                    System.out.print("          ");
                 }
             }
             System.out.println();
         }
         
-        System.out.println("    +-----------+---------+---------+---------+---------+");
-        System.out.println("    I   0-20    I  21-40  I  41-60  I  61-80  I  81-100 I");
+        System.out.print("      +-----------+---------+---------+---------+---------+\n");
+        System.out.print("      I  0-20   I  21-40  I  41-60  I  61-80  I  81-100 I\n");
 
         scanner.close();
     }
